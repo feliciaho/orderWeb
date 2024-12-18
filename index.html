@@ -24,7 +24,7 @@
           <!-- 準備暫存資料 -->
           <!-- 暫存資料轉為訂單內容 -->
           <!-- 計算總金額 -->
-          <!-- 加料 -->
+          <!-- 客製化選項 -->
           <div id="app">
             <div class="container gx-2">
               <div class="row gx-3 bg-light py-3">
@@ -48,7 +48,9 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card mb-2">
-                    <!-- <div class="position-absolute text-white d-flex align-items-center justify-content-center active" style="top: 0;bottom: 0;left: 0;right: 0;background-color: rgba(0, 0, 0, 0.65); z-index: 100;">請先選擇飲品</div> -->
+                    <div class="position-absolute text-white d-flex align-items-center justify-content-center active" 
+                    style="top: 0;bottom: 0;left: 0;right: 0;background-color: rgba(0, 0, 0, 0.65); z-index: 100;"
+                    v-if="!selectedItem.name">請先選擇飲品</div>
                     <div class="card-body px-4">
                       <div class="mb-3">
                         <label for="productNum" class="form-label">數量</label>
@@ -58,7 +60,7 @@
                           id="productNum"
                           placeholder="數量"
                           min="1"
-                          v-model="productsNum"
+                          v-model="selectedItem.count"
                         />
                       </div>
                       <div class="mb-3">
@@ -71,7 +73,7 @@
                             name="iceType"
                             type="radio"
                             :id="ice"
-                            v-model="productsIce"
+                            v-model="selectedItem.ice"
                             :value="ice"
                           />
                           <label class="form-check-label" :for="ice" 
@@ -89,7 +91,7 @@
                             name="sugarType"
                             type="radio"
                             :id="sugar"
-                            v-model="productsSugar"
+                            v-model="selectedItem.sugar"
                             :value="sugar"
                           />
                           <label class="form-check-label" :for="sugar"
@@ -150,23 +152,23 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="item in addToCart">
+                          <tr v-for="(item, key) in addToCart" :key="'order'+ key">
                             <th scope="row">
                               {{ item.name}}<br />
                               <small class="text-muted fw-normal"
                                 >備註：阿姨，我不想努力了</small
                               >
                             </th>
-                            <td>{{ productsIce }}</td>
-                            <td>{{ productsSugar }}</td>
+                            <td>{{ item.ice }}</td>
+                            <td>{{ item.sugar }}</td>
                             <td>椰果</td>
-                            <td>70</td>
-                            <td>{{ productsNum }}</td>
-                            <td class="text-end">70</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.count }}</td>
+                            <td class="text-end">{{ item.price*item.count }}</td>
                           </tr>
                         </tbody>
                       </table>
-                      <p class="text-end">共 NT$ 70 元</p>
+                      <p class="text-end">共 NT$ {{ sum }} 元</p>
                       <button class="btn btn-sm btn-secondary w-100">
                         重新選擇
                       </button>

@@ -58,19 +58,30 @@ const App = {
       ],
       selectedItem:{},
       addToCart:[],
-      productsNum : 1,
-      productsIce:'正常冰',
-      productsSugar:'半糖'
+      sum: 0,
     };
   },
   methods: {
     selectedItemFunc(product){
-        this.selectedItem={...product}
+        this.selectedItem={
+          ...product,
+          count : 1,
+          ice:'正常冰',
+          sugar:'半糖',
+        }
         // this.selectedItem = product
     },
     addToCartFunc(){
         this.addToCart.push(this.selectedItem)
-    }
+        let total= 0;
+        this.addToCart.forEach(element => {
+          total+= element.price*element.count
+          this.sum = total
+        });
+        // 如果沒有清空會跟上次的飲料連動
+        this.selectedItem=[];
+    },
+    
   },
 };
 
