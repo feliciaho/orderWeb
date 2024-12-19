@@ -17,8 +17,7 @@
         <main class="col post">
           <!-- 章節標題 -->
           <div class="mb-4">
-            <h1 class="mt-0 text-muted">章節挑戰 - 簡單版</h1>
-            <small>檔名：<code>directive-final-easy.html</code></small>
+            <h1 class="mt-0 text-muted">飲料點餐系統</h1>
           </div>
           <!-- 🔥🔥練習開始🔥🔥 -->
           <!-- 準備暫存資料 -->
@@ -67,7 +66,8 @@
                         <label for="productNum" class="form-label d-block"
                           >冰塊*</label
                         >
-                        <div class="form-check form-check-inline" v-for="ice in iceType" :key="ice">
+                        <div class="form-check form-check-inline" 
+                        v-for="(ice, key) in iceType" :key="'ice'+ key">
                           <input
                             class="form-check-input"
                             name="iceType"
@@ -85,7 +85,7 @@
                         <label for="productNum" class="form-label d-block"
                           >甜度*</label
                         >
-                        <div class="form-check form-check-inline" v-for="sugar in sugarType" :key="sugar">
+                        <div v-for="(sugar , key) in sugarType" :key="'sugar' + key" class="form-check form-check-inline" >
                           <input
                             class="form-check-input"
                             name="sugarType"
@@ -103,31 +103,33 @@
                         <label for="productNum" class="form-label d-block"
                           >加料</label
                         >
-                        <div class="form-check form-check-inline">
+                        <div v-for="(topping, key) in toppingsType" :key="'topping'+ key" class="form-check form-check-inline">
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            id="椰果"
+                            :id="topping"
+                            :value="topping"
+                            v-model="selectedItem.topping"
                           />
-                          <label class="form-check-label" for="椰果"
-                            >椰果</label
-                          >
+                          <label class="form-check-label" :for="topping">{{ topping }}</label>
                         </div>
                       </div>
                       <div class="mb-3">
                         <label for="productNotice" class="form-label"
-                          >備註</label
+                          ></label
                         >
                         <textarea
                           class="form-control"
                           id="productNotice"
                           rows="2"
+                          v-model="selectedItem.psText"
                         ></textarea>
                       </div>
                       <div class="d-flex gap-2">
                         <button
                           class="btn btn-outline-primary w-100"
                           type="button"
+                          @click="resetFunc()"
                         >
                           取消
                         </button>
@@ -156,20 +158,21 @@
                             <th scope="row">
                               {{ item.name}}<br />
                               <small class="text-muted fw-normal"
-                                >備註：阿姨，我不想努力了</small
+                                >{{ item.psText }}</small
                               >
                             </th>
                             <td>{{ item.ice }}</td>
                             <td>{{ item.sugar }}</td>
-                            <td>椰果</td>
+                            <td>{{ item.topping.join(',') }}</td>
                             <td>{{ item.price }}</td>
                             <td>{{ item.count }}</td>
-                            <td class="text-end">{{ item.price*item.count }}</td>
+                            <td class="text-end">{{ (item.price+item.topping.length*5)*item.count }}</td>
                           </tr>
                         </tbody>
                       </table>
                       <p class="text-end">共 NT$ {{ sum }} 元</p>
-                      <button class="btn btn-sm btn-secondary w-100">
+                      <button class="btn btn-sm btn-secondary w-100" 
+                      @click="cancelFunc()">
                         重新選擇
                       </button>
                     </div>

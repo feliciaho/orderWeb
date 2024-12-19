@@ -62,26 +62,38 @@ const App = {
     };
   },
   methods: {
+    // select item
     selectedItemFunc(product){
         this.selectedItem={
+          // 用淺拷貝可以直接取值 部會包在變數裡
           ...product,
           count : 1,
           ice:'正常冰',
           sugar:'半糖',
+          topping:[],
+          psText:'',
         }
-        // this.selectedItem = product
     },
+    // add to cart
     addToCartFunc(){
-        this.addToCart.push(this.selectedItem)
+        // 使用淺拷貝不讓跟新的值連動
+        this.addToCart.push({...this.selectedItem})
         let total= 0;
         this.addToCart.forEach(element => {
           total+= element.price*element.count
           this.sum = total
         });
-        // 如果沒有清空會跟上次的飲料連動
-        this.selectedItem=[];
+        this.resetFunc();
     },
-    
+    // cancel button
+    resetFunc(){
+      this.selectedItem={};
+    },
+    // cancel all button
+    cancelFunc(){
+      this.addToCart=[];
+      this.selectedItem={};
+    }
   },
 };
 
