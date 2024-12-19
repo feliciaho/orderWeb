@@ -56,49 +56,53 @@ const App = {
           price: 45,
         },
       ],
-      selectedItem:{},
-      addToCart:[],
+      selectedItem: {},
+      addToCart: [],
       sum: 0,
     };
   },
   methods: {
     // select item
-    selectedItemFunc(product){
-        this.selectedItem={
-          // 用淺拷貝可以直接取值 部會包在變數裡
-          ...product,
-          count : 1,
-          ice:'正常冰',
-          sugar:'半糖',
-          topping:[],
-          psText:'',
-        }
+    selectedItemFunc(product) {
+      this.selectedItem = {
+        // 用淺拷貝可以直接取值 部會包在變數裡
+        ...product,
+        count: 1,
+        ice: "正常冰",
+        sugar: "半糖",
+        topping: [],
+        psText: "",
+      };
     },
     // add to cart
-    addToCartFunc(){
-        // 使用淺拷貝不讓跟新的值連動
-        this.addToCart.push({...this.selectedItem})
-        let total= 0;
-        this.addToCart.forEach(element => {
-          total+= (element.price + element.topping.length*5)*element.count
-          this.sum = total
-        });
-        this.resetFunc();
+    addToCartFunc() {
+      // 使用淺拷貝不讓跟新的值連動
+      this.addToCart.push({ ...this.selectedItem });
+      this.calculateFunc();
+      this.resetFunc();
+    },
+    // count price
+    calculateFunc(){
+      let total = 0;
+      this.addToCart.forEach((element) => {
+        total += (element.price + element.topping.length * 5) * element.count;
+        this.sum = total;
+      });
     },
     // cancel button
-    resetFunc(){
-      this.selectedItem={};
+    resetFunc() {
+      this.selectedItem = {};
     },
     // cancel all button
-    cancelFunc(){
-      this.addToCart=[];
-      this.selectedItem={};
+    cancelFunc() {
+      this.addToCart = [];
+      this.selectedItem = {};
     },
     // delete one
-    deleteOneFunc(num){
-      this.addToCart.splice(num,1)
-      console.log(num)
-    }
+    deleteOneFunc(num) {
+      this.addToCart.splice(num, 1);
+      this.calculateFunc();
+    },
   },
 };
 
