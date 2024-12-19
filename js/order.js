@@ -80,7 +80,7 @@ const App = {
         this.addToCart.push({...this.selectedItem})
         let total= 0;
         this.addToCart.forEach(element => {
-          total+= element.price*element.count
+          total+= (element.price + element.topping.length*5)*element.count
           this.sum = total
         });
         this.resetFunc();
