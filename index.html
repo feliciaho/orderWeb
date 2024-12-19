@@ -165,7 +165,8 @@
                             <td>{{ item.topping.join(',') }}</td>
                             <td>{{ item.price }}</td>
                             <td>{{ item.count }}</td>
-                            <td class="text-end">{{ (item.price+item.topping.length*5)*item.count }}</td>
+                            <td>{{ (item.price+item.topping.length*5)*item.count }}</td>
+                            <td class="text-end"><button @click="deleteOneFunc(key)">取消</button></td>
                           </tr>
                         </tbody>
                       </table>

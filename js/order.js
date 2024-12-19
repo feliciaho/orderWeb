@@ -93,6 +93,11 @@ const App = {
     cancelFunc(){
       this.addToCart=[];
       this.selectedItem={};
+    },
+    // delete one
+    deleteOneFunc(num){
+      this.addToCart.splice(num,1)
+      console.log(num)
     }
   },
 };
