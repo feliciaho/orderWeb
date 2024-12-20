@@ -116,21 +116,14 @@ const App = {
       this.addToCart.splice(num, 1);
       this.calculateFunc();
     },
-    mounted(){
-      $("#productCount").on("input",function(){
-        if($(this).val()> 50){
-          $(this).val(50);
-        }
-      })
-    }
   },
   mounted(){
-    $("#productCount").on("input",function(){
+    $("#productCount").on("input change",function(){
       if($(this).val()> 50){
         $(this).val(50);
       }
     })
-  }
+  },
 };
 
 Vue.createApp(App).mount("#app");
