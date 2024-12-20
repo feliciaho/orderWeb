@@ -107,6 +107,7 @@ const App = {
     confirmFunc() {
       this.addToCart = [];
       this.selectedItem = {};
+      this.sum = 0;
       alert("已收到您的訂單");
     },
     // delete one
