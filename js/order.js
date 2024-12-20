@@ -108,6 +108,7 @@ const App = {
       this.addToCart = [];
       this.selectedItem = {};
       alert("已收到您的訂單");
+      this.sum=0;
     },
     // delete one
     deleteOneFunc(num) {
