@@ -109,6 +109,7 @@ const App = {
       this.selectedItem = {};
       this.sum = 0;
       alert("已收到您的訂單");
+      this.sum=0;
     },
     // delete one
     deleteOneFunc(num) {
