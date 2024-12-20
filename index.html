@@ -77,6 +77,7 @@
                             :id="ice"
                             v-model="selectedItem.ice"
                             :value="ice"
+                            :disabled="selectedItem.name === '薑母茶(熱飲)'"
                           />
                           <label class="form-check-label" :for="ice" 
                             >{{ ice }}</label
@@ -94,6 +95,7 @@
                             type="radio"
                             :id="sugar"
                             v-model="selectedItem.sugar"
+                            :disabled="selectedItem.name === '古意冬瓜茶(糖固定)'"
                             :value="sugar"
                           />
                           <label class="form-check-label" :for="sugar"
@@ -174,10 +176,12 @@
                         </tbody>
                       </table>
                       <p class="text-end">共 NT$ {{ sum }} 元</p>
-                      <button class="btn btn-sm btn-secondary w-100" 
-                      @click="cancelFunc()">
-                        重新選擇
-                      </button>
+                      <div>
+                        <button class="btn btn-sm btn-secondary w-100" 
+                        @click="confirmFunc()">
+                          確認送出
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

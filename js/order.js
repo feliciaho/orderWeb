@@ -16,7 +16,7 @@ const App = {
           price: 50,
         },
         {
-          name: "古意冬瓜茶",
+          name: "古意冬瓜茶(糖固定)",
           engName: "Winter Melon Drink",
           price: 30,
         },
@@ -36,9 +36,10 @@ const App = {
           price: 55,
         },
         {
-          name: "薑母茶",
+          name: "薑母茶(熱飲)",
           engName: "Ginger Tea",
           price: 55,
+          iceType:"熱",
         },
         {
           name: "青草茶",
@@ -73,6 +74,14 @@ const App = {
         topping: [],
         psText: "",
       };
+      switch (product.name) {
+        case"薑母茶(熱飲)":
+          this.selectedItem.ice = "熱";
+          break;
+        case"古意冬瓜茶(糖固定)":
+          this.selectedItem.sugar = "七分";
+          break;
+      };
     },
     // add to cart
     addToCartFunc() {
@@ -86,17 +95,19 @@ const App = {
       let total = 0;
       this.addToCart.forEach((element) => {
         total += (element.price + element.topping.length * 5) * element.count;
-        this.sum = total;
       });
+      // 必須放在forEach外面才能讓addToCart陣列為空時也可以繼續計算
+      this.sum = total;
     },
     // cancel button
     resetFunc() {
       this.selectedItem = {};
     },
-    // cancel all button
-    cancelFunc() {
+    // confirm button
+    confirmFunc() {
       this.addToCart = [];
       this.selectedItem = {};
+      alert("已收到您的訂單");
     },
     // delete one
     deleteOneFunc(num) {
