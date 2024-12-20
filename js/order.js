@@ -117,6 +117,13 @@ const App = {
       this.calculateFunc();
     },
   },
+  mounted(){
+    $("#productCount").on("input",function(){
+      if($(this).val()> 50){
+        $(this).val(50);
+      }
+    })
+  }
 };
 
 Vue.createApp(App).mount("#app");

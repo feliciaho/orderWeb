@@ -53,11 +53,11 @@
                     v-if="!selectedItem.name">請先選擇飲品</div>
                     <div class="card-body px-4">
                       <div class="mb-3">
-                        <label for="productNum" class="form-label">數量</label>
+                        <label for="productNum" class="form-label">數量(單筆最多50杯)</label>
                         <input
                           type="number"
                           class="form-control"
-                          id="productNum"
+                          id="productCount"
                           placeholder="數量"
                           min="1"
                           max="50"
@@ -195,6 +195,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/order.js"></script>
   </body>
