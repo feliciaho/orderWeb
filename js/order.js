@@ -118,8 +118,13 @@ const App = {
   },
   mounted(){
     $("#productCount").on("input change",function(){
-      if($(this).val()> 50){
-        $(this).val(50);
+      switch(true){
+        case $(this).val() < 1:
+          $(this).val(1);
+          break;
+        case $(this).val() > 50:
+          $(this).val(50);
+          break;
       }
     })
   },
